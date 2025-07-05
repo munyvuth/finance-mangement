@@ -3,7 +3,7 @@ import { Outlet, Link } from "react-router-dom";
 function NavBar() {
     return (
         <>
-            <div className="w-full h-[10vh] bg-[#E68FDE] relative font-mono">
+            <div className="w-full h-[10vh] bg-[#E68FDE] relative">
                 <Link to="/">
                     <h1 className="text-white lg:text-2xl text-md absolute top-1/2 -translate-y-1/2 px-[2vw]">Fernandez Finance</h1>
 
