@@ -6,6 +6,7 @@ RUN npm install
 
 # Copy function code 
 COPY createUser.mjs ${LAMBDA_TASK_ROOT}
+COPY authUser.mjs ${LAMBDA_TASK_ROOT}
 
 # Command to run the Lambda function
 CMD ["createUser.handler"]
