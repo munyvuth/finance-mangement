@@ -12,8 +12,8 @@ function SignUp() {
                 <input type="password" className="w-full h-[4vh] rounded-md text-[#E68FDE] font-bold p-2" id="lastname"></input>
             </div>
             <div className="w-3/4 m-auto lg:mt-[3vh] mt-[1vh]">
-                <label className="lg:text-md text-white block my-1" for="username">Username</label>
-                <input className="w-full h-[4vh] rounded-md text-[#E68FDE] font-bold p-2" id="username"></input>
+                <label className="lg:text-md text-white block my-1" for="email">Email</label>
+                <input className="w-full h-[4vh] rounded-md text-[#E68FDE] font-bold p-2" id="email"></input>
             </div>
             <div className="w-3/4 m-auto lg:mt-[3vh] mt-[1vh]">
                 <label className="lg:text-md text-white block my-1" for="password">Password</label>

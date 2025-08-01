@@ -6,8 +6,8 @@ function SignIn() {
         <form className="bg-[#E68FDE] lg:w-1/4 w-1/3 h-[60vh] rounded-3xl m-auto align-middle mt-[10vh]">
             <h1 className="text-white text-bold lg:text-2xl text-sm text-center pt-[5vh]">Track your Finances!</h1>
             <div className="w-3/4 m-auto lg:mt-[4vh] mt-[1vh]">
-                <label className="lg:text-md text-white block my-1" for="username">Username</label>
-                <input className="w-full h-[4vh] rounded-md text-[#E68FDE] font-bold p-2" id="username"></input>
+                <label className="lg:text-md text-white block my-1" for="email">Email</label>
+                <input className="w-full h-[4vh] rounded-md text-[#E68FDE] font-bold p-2" id="email"></input>
             </div>
             <div className="w-3/4 m-auto lg:mt-[3vh] mt-[1vh]">
                 <label className="lg:text-md text-white block my-1" for="password">Password</label>
