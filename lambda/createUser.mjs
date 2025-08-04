@@ -1,4 +1,5 @@
 import pg from 'pg';
+import { parseParams } from './authUser.mjs';
 
 const { Pool } = pg;
 
@@ -19,20 +20,21 @@ export const handler = async (event) => {
 
   try {
     const client = await pool.connect();
+    const requestBody = parseParams(event);
+
+    const firstName = requestBody.firstName;
+    const lastName = requestBody.lastName;
+    const email = requestBody.email;
+    const password = requestBody.password;
 
     await client.query("CREATE EXTENSION IF NOT EXISTS pgcrypto;");
-
-    const firstName = event.firstName;
-    const lastName = event.lastName;
-    const email = event.email;
-    const password = event.password;
 
     await client.query(`
       INSERT INTO app_user 
       (first_name, last_name, email, password)
       VALUES ($1, $2, $3, crypt($4, gen_salt('bf')));
       `, [firstName, lastName, email, password])
-    
+
     client.release();
     return {
       statusCode: 200,
@@ -44,7 +46,7 @@ export const handler = async (event) => {
     return {
       statusCode: 500,
       body: JSON.stringify({
-        message: 'Unsuccessful connection', 
+        message: 'Unsuccessful connection',
         error: err
       }),
     };

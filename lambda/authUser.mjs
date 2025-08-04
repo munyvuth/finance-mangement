@@ -14,11 +14,13 @@ const pool = new Pool({
 });
 
 export const handler = async (event) => {
+
     try {
         const client = await pool.connect();
 
-        const email = event.email;
-        const password = event.password;
+        const requestBody = parseParams(event);
+        const email = requestBody.email;
+        const password = requestBody.password;
 
         await client.query("CREATE EXTENSION IF NOT EXISTS pgcrypto;");
 
@@ -30,14 +32,14 @@ export const handler = async (event) => {
         if (result.rows.length > 0) {
             console.log("Match found, user authenticated!");
             return {
-                status: 200,
+                statusCode: 200,
                 body: JSON.stringify({
                     message: "Successful authentication"
                 })
             }
         } else {
             return {
-                status: 401,
+                statusCode: 401,
                 body: JSON.stringify({
                     message: "Unsuccessful authentication"
                 })
@@ -46,11 +48,29 @@ export const handler = async (event) => {
 
     } catch (err) {
         return {
-            status: 500,
+            statusCode: 500,
             body: JSON.stringify({
                 message: "Unable to fulfill request",
                 error: err.message
             })
         }
     }
+}
+
+export const parseParams = (event) => {
+    if (typeof event.body === 'string') {
+        try {
+            return JSON.parse(event.body);
+        } catch (err) { 
+            console.error("Issue parsing request body");
+            return {
+                statusCode: 400,
+                body: JSON.stringify({
+                    message: "Invalid JSON format"
+                })
+            }
+        }
+    } else {
+        return event.body;
+    };
 }
