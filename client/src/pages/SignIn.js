@@ -57,7 +57,7 @@ function SignIn() {
             <h1 className="text-white text-bold lg:text-2xl text-sm text-center pt-[5vh]">Track your Finances!</h1>
             <div className="w-3/4 m-auto lg:mt-[4vh] mt-[1vh]">
                 <label className="lg:text-md text-white block my-1" for="email">Email</label>
-                <input required className="w-full h-[4vh] rounded-md text-[#E68FDE] font-bold p-2" id="email" value={email} onChange={(event) => {
+                <input required type="email" className="w-full h-[4vh] rounded-md text-[#E68FDE] font-bold p-2" id="email" value={email} onChange={(event) => {
                     updateEmail(event.target.value);
                 }}></input>
             </div>
