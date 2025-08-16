@@ -38,7 +38,12 @@ export const handler = async (event) => {
     client.release();
     return {
       statusCode: 200,
-      body: JSON.stringify(`User ${firstName} ${lastName} created successfully`),
+      body: JSON.stringify({
+        message: `User ${firstName} ${lastName} created successfully`,
+        user: {
+          firstName, lastName, email
+        }
+      }),
     };
   } catch (err) {
     console.error("Database connection error:", err);

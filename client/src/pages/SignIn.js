@@ -1,45 +1,14 @@
 import { Link } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
+import { useAuth } from "../components/AuthProvider";
 
 
 function SignIn() {
 
     const [email, updateEmail] = useState("");
     const [password, updatePassword] = useState("");
+    const auth = useAuth();
 
-
-    const login = useMutation(
-        {
-            mutationFn: async () => {
-                const response = await fetch(process.env.REACT_APP_LOGIN_URL, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        "email": email, 
-                        "password": password
-                    })
-                });
-
-                if (!response.ok) {
-                    throw new Error("Authentication failed, please check your request");
-                }
-
-                return response.json();
-            },
-            onSuccess: (data) => {
-                console.log("Login successful", data);
-                window.location.href = "/";
-            },
-            onError: (error) => {
-                console.log(`Email is ${email} and password is ${password}`)
-                console.error("Login unsuccessful:", error.message);
-                alert("The email or password you entered is incorrect!")
-            }
-        }
-    );
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -47,7 +16,8 @@ function SignIn() {
         if (email === "" || password === "") {
             alert("Please make sure your inputs are valid!");
         } else {
-            login.mutate();
+            const params = { email, password }; 
+            auth.login.mutate(params);
         }
     };
 

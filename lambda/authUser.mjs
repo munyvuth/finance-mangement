@@ -31,10 +31,16 @@ export const handler = async (event) => {
         client.release();
         if (result.rows.length > 0) {
             console.log("Match found, user authenticated!");
+            const firstName = result.rows[0].first_name;
+            const lastName = result.rows[0].last_name;
+            const email = result.rows[0].email;
             return {
                 statusCode: 200,
                 body: JSON.stringify({
-                    message: "Successful authentication"
+                    message: "Successful authentication",
+                    user: {
+                        firstName, lastName, email
+                    }
                 })
             }
         } else {
